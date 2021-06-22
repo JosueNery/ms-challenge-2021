@@ -36,7 +36,7 @@ NU_NOTA_CH|NU_NOTA_LC|NU_NOTA_MT|NOTA OFICIAL|NOTA PREVISTA _A*_|NOTA PREVISTA _
 ## Desafio 2 - (5 pontos) Escolha um estado da federação e clusterize os estudantes do enade com base em suas respostas ao questionário socioeconômico.
 
 ##### Pré-processamento dos dados:
-O dataset foi colocado em um conjunto de dados onde já separei apenas as colunas que vão ser usadas no treinamento (Q006;Q025;NU_NOTA_REDACAO).
+O dataset foi colocado em um conjunto de dados onde já separei apenas as colunas que vão ser usadas no treinamento (Q006;Q025;NU_NOTA_REDACAO), foi pedido para escolher os dados de um estado da federação em específico, então usei o  _**"Split Data"**_ com o parâmetro de "Regular Expression" com a seguinte entrada selecionando apenas os dados do estado de Minas Gerais:\"SG_UF_RESIDENCIA" MG.
 Através do Designer do estúdio do Azure Machine Learning fiz o tratamento do dataset usando o módulo _**"Clean Missing Data"**_ nesse caso considerei que fosse necessário retirar a linha completa do dataset, caso houvesse a falta de algum dado. O módulo _**"Split Data"**_ foi usado com as propriedades de Split Rows com a fração de 0.7, de forma que 70% das linhas são usadas para o treinamento e 30% para avaliar o modelo, as linhas foram separadas de forma aleatória e usando a "Random seed" padrão do módulo.
 
 ##### Treinando o modelo: 
@@ -79,7 +79,5 @@ Evaluation For Cluster No.0|1.961089|1.587573|81667|1.823156
 Evaluation For Cluster No.1|1.763879|1.338415|48512|1.47732
 Combined Evaluation|1.887598|1.494723|130179|1.823156
 
-Foi então criada uma pipeline de inferência em tempo real com as seguintes entradas e saídas:
-NU_NOTA_REDACAO|Q006|Q025|Assignments|DistancesToClusterCenter no.0|DistancesToClusterCenter no.1|DistancesToClusterCenter no.2
----------------|----|----|-----------|-----------------------------|-----------------------------|-------------------------------
+
 
