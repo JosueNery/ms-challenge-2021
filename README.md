@@ -79,5 +79,22 @@ Evaluation For Cluster No.0|1.961089|1.587573|81667|1.823156
 Evaluation For Cluster No.1|1.763879|1.338415|48512|1.47732
 Combined Evaluation|1.887598|1.494723|130179|1.823156
 
+## Desafio 4 - (6 pontos) Criando um preditor de notas no ENADE
 
+Foi necessário alguns dias lendo a documentação do Azure Machine Learning e do Pandas (utilizado no código Python para tratamento). Aqui foi utilizado o ML Automatizado para criar as previsões, uma vez que possui uma opção específica para isso, mas algumas alterações no dataset através do Designer.
+
+##### Pré-processamento dos dados:
+Neste tópico foi utilizado o Designer, foram colhidos os microdados das provas anteriores, 2019, 2018, 2017, 2016 e 2015, do ENADE. 
+Cada dataset ficou em um conjunto de dados próprio e as colunas selecionadas foram a NU_ANO(usada para o modelo no ML Automatizado) e NT_GER(Nota Geral, coluna foco da predição). É necessário uma coluna de "Carimbo de data/tempo" para o método preditor do ML Automatizado, então selecionei a coluna NU_ANO para pegar o ano dos microdados e então transformei em data no momento em que foram criados os conjuntos de dados. 
+Com as colunas selecionadas usei o módulo _**"Clean Missing Data"**_ em todos os microdados para substituir os valores faltantes pela mediana, ao estudar os dados descobri que existiam alguns dados com _erro_, para selecionar apenas os dados corretos utilizei do mesmo método colocado no Desafio 2 através do _**"Split Data"**_ com o parâmetro de "Regular Expression" selecionei apenas as linhas que continham a seguinte expressão _**\"NT_GER"^[0-9]**_.
+Com os datasets "limpos" de dados com _erro_ ou nulos percebi ainda uma necessidade, normalizar os dados na tabela para o mesmo tipo "NT_GER" pois estava dando erro, tentei fazer a edição através do módulo  _**Edit Metadata**_, procurei outros módulos, mas dava um erro de conversão de String para float64, com as limitações dos módulos que encontrei decidi utilizar o módulo  _**Execute Python Script**_ pois percebi que o erro ocorreu apenas no dataset onde havia números utilizando "," ao invés de ".", então escrevi o código que trocou a vírgula pelo ponto e apenas assim obtive sucesso no tratamento da coluna.
+```javascript
+
+
+```
+
+
+
+ _****_
+##### Treinando o modelo: 
 
