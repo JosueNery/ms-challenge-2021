@@ -88,8 +88,22 @@ Neste tópico foi utilizado o Designer, foram colhidos os microdados das provas 
 Cada dataset ficou em um conjunto de dados próprio e as colunas selecionadas foram a NU_ANO(usada para o modelo no ML Automatizado) e NT_GER(Nota Geral, coluna foco da predição). É necessário uma coluna de "Carimbo de data/tempo" para o método preditor do ML Automatizado, então selecionei a coluna NU_ANO para pegar o ano dos microdados e então transformei em data no momento em que foram criados os conjuntos de dados. 
 Com as colunas selecionadas usei o módulo _**"Clean Missing Data"**_ em todos os microdados para substituir os valores faltantes pela mediana, ao estudar os dados descobri que existiam alguns dados com _erro_, para selecionar apenas os dados corretos utilizei do mesmo método colocado no Desafio 2 através do _**"Split Data"**_ com o parâmetro de "Regular Expression" selecionei apenas as linhas que continham a seguinte expressão _**\"NT_GER"^[0-9]**_.
 Com os datasets "limpos" de dados com _erro_ ou nulos percebi ainda uma necessidade, normalizar os dados na tabela para o mesmo tipo "NT_GER" pois estava dando erro, tentei fazer a edição através do módulo  _**Edit Metadata**_, procurei outros módulos, mas dava um erro de conversão de String para float64, com as limitações dos módulos que encontrei decidi utilizar o módulo  _**Execute Python Script**_ pois percebi que o erro ocorreu apenas no dataset onde havia números utilizando "," ao invés de ".", então escrevi o código que trocou a vírgula pelo ponto e apenas assim obtive sucesso no tratamento da coluna.
-```javascript
+```python
+# The script MUST contain a function named azureml_main
+# which is the entry point for this module.
 
+# imports up here can be used to
+import pandas as pd
+import numpy as np
+
+# The entry point function MUST have two input arguments.
+# If the input port is not connected, the corresponding
+# dataframe argument will be None.
+#   Param<dataframe1>: a pandas.DataFrame
+#   Param<dataframe2>: a pandas.DataFrame
+def azureml_main(dataframe1 = None, dataframe2 = None):
+
+    return  dataframe1.replace(to_replace=r',', value='.', regex=True),
 
 ```
 
